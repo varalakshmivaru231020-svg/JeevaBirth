@@ -4,7 +4,8 @@
   <div class="page-banner-overlay"></div>
   <div class="page-banner-content">
     @if(count($breadcrumbs) > 0)
-    <nav class="page-banner-breadcrumb" aria-label="Breadcrumb">
+    {{-- div, not <nav>: the global `nav{position:fixed}` rule would pin it over the header --}}
+    <div class="page-banner-breadcrumb" role="navigation" aria-label="Breadcrumb">
       <a href="{{ route('home') }}">Home</a>
       @foreach($breadcrumbs as $crumb)
         <span class="breadcrumb-sep">&rsaquo;</span>
@@ -14,7 +15,7 @@
           <span class="breadcrumb-current">{{ $crumb['label'] }}</span>
         @endif
       @endforeach
-    </nav>
+    </div>
     @endif
     <h1 class="page-banner-title">{{ $title }}</h1>
     @if($subtitle)
@@ -44,7 +45,8 @@
   z-index: 2;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 100px 6% 48px;
+  /* top padding clears the fixed floating nav + round logo (logo bottom ≈ 140px on desktop) */
+  padding: 165px 6% 48px;
   width: 100%;
 }
 .page-banner-breadcrumb {
@@ -87,13 +89,14 @@
 }
 @media (max-width: 768px) {
   .page-banner { min-height: 300px; }
-  .page-banner-content { padding: 90px 5% 40px; }
+  /* mobile nav: top 20px + logo reaches ≈105px, so start content below that */
+  .page-banner-content { padding: 130px 5% 40px; }
   .page-banner-title { font-size: clamp(26px, 6vw, 38px); }
   .page-banner-subtitle { font-size: 16px; }
 }
 @media (max-width: 480px) {
   .page-banner { min-height: 260px; }
-  .page-banner-content { padding: 80px 5% 32px; }
+  .page-banner-content { padding: 130px 5% 32px; }
   .page-banner-title { font-size: clamp(20px, 6vw, 26px) !important; line-height: 1.25; }
   .page-banner-subtitle { font-size: 14px; }
 }

@@ -4011,7 +4011,7 @@ footer{
 
   /* Page banner (title sections) */
   .page-banner { min-height: 240px; }
-  .page-banner-content { padding: 80px 5% 30px; }
+  .page-banner-content { padding: 130px 5% 30px; }
   .page-banner-title { font-size: clamp(28px, 7vw, 36px) !important; }
   .page-banner-subtitle { font-size: 14px; }
 

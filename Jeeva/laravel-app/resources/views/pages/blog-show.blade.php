@@ -9,19 +9,19 @@
 <x-page-banner
   :title="$article['title']"
   :subtitle="$article['excerpt'] ?? ''"
-  image="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1600&q=80"
+  :image="!empty($article['image']) ? asset(ltrim($article['image'], '/')) : 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1600&q=80'"
   :breadcrumbs="[['label' => 'Blog', 'url' => route('blog')], ['label' => $article['title']]]"
 />
 
 <section>
   <div class="container">
-    <article class="article-shell reveal">
+    <article class="article-shell">
       <a href="{{ route('blog') }}" class="article-back">&larr; Back to all articles</a>
 
       <div class="article-hero">
         <div class="blog-thumb article-thumb {{ $article['thumb_class'] }}">
           @if(!empty($article['image']))
-            <img src="{{ $article['image'] }}" alt="{{ $article['title'] }}" class="blog-feature-image">
+            <img src="{{ asset(ltrim($article['image'], '/')) }}" alt="{{ $article['title'] }}" class="blog-feature-image">
           @else
             <div class="ico-wrap">{{ $article['icon'] }}</div>
           @endif
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div class="article-prose reveal d1">
+      <div class="article-prose">
         {!! \App\Support\Html::render($article['content']) !!}
       </div>
     </article>
